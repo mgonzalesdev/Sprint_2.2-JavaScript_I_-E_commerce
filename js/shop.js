@@ -78,6 +78,27 @@ var total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
+    const product = products.find(prod => prod.id === id);
+    if (product === undefined) {
+        alert("Error identificador de producto no válido");
+    } else {
+        const indice = cart.findIndex(prod => prod.id === id);
+        if (indice == -1) {  //Producto no se ecuentra en el cart
+            const productAdd = { ...product };
+            Object.defineProperty(productAdd, "quantity", {
+                value: 1,
+                writable: true,  // Permite modificar el valor
+                enumerable: true,  // Permite listar la propiedad con for...in
+                configurable: false,  // Permite modificar o eliminar la propiedad
+            });
+            cart.push(productAdd);
+        } else {
+            cart[indice].quantity++;
+        }
+        updateCartCount();
+        console.log(products);
+        console.log(cart);
+    }
 }
 
 // Exercise 2
@@ -110,4 +131,12 @@ function removeFromCart(id) {
 
 function open_modal() {
     printCart();
+}
+
+
+//Funciones Auxiliares
+function updateCartCount() {
+    let count = cart.reduce((totalProduct, product) => totalProduct + product.quantity, 0);
+    document.getElementById("count_product").innerHTML = count;
+
 }
