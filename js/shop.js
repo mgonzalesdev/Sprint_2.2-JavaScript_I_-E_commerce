@@ -64,9 +64,9 @@ var products = [
     }
 ]
 
-// => Reminder, it's extremely important that you debug your code. 
+// => Reminder, it's extremely important that you debug your code.
 // ** It will save you a lot of time and frustration!
-// ** You'll understand the code better than with console.log(), and you'll also find errors faster. 
+// ** You'll understand the code better than with console.log(), and you'll also find errors faster.
 // ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
@@ -103,6 +103,19 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
+    cart.length = 0;
+    updateCartCount();
+
+    fetch('template/modalConfirmClear.html') // Usa fetch o ajax para cargar el contenido
+        .then(response => response.text())
+        .then(html => {
+            document.body.insertAdjacentHTML('beforeend', html); // Inserta el HTML en el body
+            let myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            // Abre el modal
+            myModal.show();
+            
+
+        });
 
 }
 
@@ -139,4 +152,9 @@ function updateCartCount() {
     let count = cart.reduce((totalProduct, product) => totalProduct + product.quantity, 0);
     document.getElementById("count_product").innerHTML = count;
 
+}
+
+function confirmClear() {
+    alert("Confirmacion");
+    myModal.modal('hide');
 }
