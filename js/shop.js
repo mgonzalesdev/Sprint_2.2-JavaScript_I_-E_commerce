@@ -155,6 +155,18 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    let cartList = document.getElementById("cart_list");
+    document.getElementById("total_price").innerHTML = total;
+    let rows = ""
+    cart.forEach(product => {
+        rows += `<tr>
+                    <th scope="row">${product.name}</th>
+                    <td>$${product.price}</td>
+                    <td>${product.quantity}</td>
+                    <td>$${(product.hasOwnProperty("subtotalWithDiscount") ? product.subtotalWithDiscount : (product.quantity * product.price))}</td>
+                </tr>`
+    });
+    cartList.innerHTML = rows;
 }
 
 
