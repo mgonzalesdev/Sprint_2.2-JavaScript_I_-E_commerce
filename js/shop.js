@@ -95,12 +95,11 @@ function buy(id) {
         } else {
             cart[indice].quantity++;
         }
-        updateCartCount();
+        updateCartCount();//Actualiza el contador del carrito
         applyPromotionsCart();
         console.log(products);
         console.log(cart);
         calculateTotal();
-
     }
 }
 
@@ -108,7 +107,7 @@ function buy(id) {
 function cleanCart() {
     cart.length = 0;
     updateCartCount();
-
+    showCartMessage();
     fetch('template/modalConfirmClear.html') // Usa fetch o ajax para cargar el contenido
         .then(response => response.text())
         .then(html => {
@@ -138,49 +137,69 @@ function calculateTotal() {
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     cart.forEach(product => {
-        if (product.hasOwnProperty("offer")) {
-            if (product.quantity >= product.offer.number) {
-                // product.subtotalWithDiscount =  (1 - (product.offer.percent / 100))
-                let subtotal = product.quantity * product.price * (1 - (product.offer.percent / 100));
-                product.subtotalWithDiscount = +subtotal.toFixed(2);
-                // if (product.hasOwnProperty("subtotalWithDiscount"))
-                //     else
-            } else { //remove subtotalWithDiscount
-                delete product.subtotalWithDiscount;
-            }
-        }
+        validatePromotion(product);
+        // if (product.hasOwnProperty("offer")) {
+        //     if (product.quantity >= product.offer.number) {
+        //         // product.subtotalWithDiscount =  (1 - (product.offer.percent / 100))
+        //         let subtotal = product.quantity * product.price * (1 - (product.offer.percent / 100));
+        //         product.subtotalWithDiscount = +subtotal.toFixed(2);
+        //         // if (product.hasOwnProperty("subtotalWithDiscount"))
+        //         //     else
+        //     } else { //remove subtotalWithDiscount
+        //         delete product.subtotalWithDiscount;
+        //     }
+        // }
     });
 }
 
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    let cartList = document.getElementById("cart_list");
-    document.getElementById("total_price").innerHTML = total;
-    let rows = ""
-    cart.forEach(product => {
-        rows += `<tr>
+    showCartMessage();
+    if (cart.length > 0) {
+        let cartList = document.getElementById("cart_list");
+
+        let rows = ""
+        cart.forEach(product => {
+            rows += `<tr>
                     <th scope="row">${product.name}</th>
                     <td>$${product.price}</td>
                     <td>${product.quantity}</td>
                     <td>$${(product.hasOwnProperty("subtotalWithDiscount") ? product.subtotalWithDiscount : (product.quantity * product.price))}</td>
+                    <td><button type="button" onclick="removeFromCart(${product.id})" class="btn btn-outline-dark"><i class="fa fa-trash"></i></button></td>
                 </tr>`
-    });
-    cartList.innerHTML = rows;
+        });
+        cartList.innerHTML = rows;
+        document.getElementById("total_price").innerHTML = total;
+    }
 }
-
 
 // ** Nivell II **
 
 // Exercise 7
 function removeFromCart(id) {
-
+    console.log(cart);
+    console.log(products);
+    let index = cart.findIndex(producto => producto.id === id)
+    if (index == -1)
+        alert("Producto no encontrado");
+    else {
+        if (cart[index].quantity == 1) {
+            cart.splice(index, 1);
+        } else {
+            cart[index].quantity--;
+            validatePromotion(cart[index]);
+        }
+        updateCartCount();
+        calculateTotal();
+        printCart();
+    }
 }
 
 function open_modal() {
     printCart();
+    console.log('mostrar');
 }
-
 
 //Funciones Auxiliares
 function updateCartCount() {
@@ -192,4 +211,28 @@ function updateCartCount() {
 function confirmClear() {
     alert("Confirmacion");
     myModal.modal('hide');
+}
+
+function validatePromotion(product) {
+    if (product.hasOwnProperty("offer")) {
+        if (product.quantity >= product.offer.number) {
+            let subtotal = product.quantity * product.price * (1 - (product.offer.percent / 100));
+            product.subtotalWithDiscount = +subtotal.toFixed(2);
+        } else {
+            delete product.subtotalWithDiscount;
+        }
+    }
+}
+
+function showCartMessage() {
+    let shoppingCart = document.getElementById("shoppingCart");
+    let emptyCart = document.getElementById("empty_car");
+    if (cart.length == 0) {
+        shoppingCart.classList.add("d-none");
+        emptyCart.classList.remove("d-none");
+    } else {
+        emptyCart.classList.add("d-none");
+        shoppingCart.classList.remove("d-none");
+    }
+
 }
