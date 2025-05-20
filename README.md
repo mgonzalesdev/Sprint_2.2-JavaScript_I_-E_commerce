@@ -20,8 +20,8 @@ El proyecto disponía de una base en el cual se implmento la lógica de las sigu
 * Editor de código, para visualizar los archivos. 
 
 ## Instalación.  
-El proyecto se puede visualizar en:  
-[ShopNow](https://mgonzalesdev.github.io/Sprint_2.2-JavaScript_I_-E_commerce/)
+El proyecto se puede visualizar en github pages:  
+[ShopNow](https://mgonzalesdev.github.io/Sprint_2.2-JavaScript_I_-E_commerce/)  
 Para ver el proyecto de manera local se debe clonar el repositorio [ShopNow](https://github.com/mgonzalesdev/Sprint_2.2-JavaScript_I_-E_commerce.git) o descargar comprimido. 
 
 ## Ejecución.  
