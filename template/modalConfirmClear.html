@@ -1,17 +1,21 @@
-<div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Confirmacion</h5>
+                <h5 class="modal-title" id="myModalLabel">Are you sure you want to empty your cart <i class="fa fa-question"></i></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Estas seguro de vaciar el carrito.
+                <div id="empty_car" class="row">
+                    <div class="col-12 d-flex flex-column align-items-center">
+                        <img class="img-alert" src="images/alert.png" alt="Alert">
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Otro</button>
-                <a href="javascript:void(0)" onclick="confirmClear()" class="btn btn-primary m-3">Si</a>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button id="aceptClear" type="button" class="btn btn-dark">Accept</button>
             </div>
         </div>
     </div>

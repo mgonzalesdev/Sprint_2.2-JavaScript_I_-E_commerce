@@ -83,7 +83,7 @@ function buy(id) {
         alert("Error identificador de producto no válido");
     } else {
         const indice = cart.findIndex(prod => prod.id === id);
-        if (indice == -1) {  //Producto no se ecuentra en el cart
+        if (indice == -1) {
             const productAdd = { ...product };
             Object.defineProperty(productAdd, "quantity", {
                 value: 1,
@@ -95,28 +95,30 @@ function buy(id) {
         } else {
             cart[indice].quantity++;
         }
-        updateCartCount();//Actualiza el contador del carrito
+        updateCartCount();
         applyPromotionsCart();
-        console.log(products);
-        console.log(cart);
         calculateTotal();
+        console.log(cart);
     }
 }
 
 // Exercise 2
 function cleanCart() {
-    cart.length = 0;
-    updateCartCount();
-    showCartMessage();
-    fetch('template/modalConfirmClear.html') // Usa fetch o ajax para cargar el contenido
+    fetch('template/modalConfirmClear.html')
         .then(response => response.text())
         .then(html => {
-            document.body.insertAdjacentHTML('beforeend', html); // Inserta el HTML en el body
+            document.body.insertAdjacentHTML('beforeend', html); 
             let myModal = new bootstrap.Modal(document.getElementById('myModal'));
-            // Abre el modal
             myModal.show();
+            document.getElementById('aceptClear').addEventListener('click', () => {
+                cart.length = 0;
+                updateCartCount();
+                showCartMessage();
+                myModal.hide();
+            });
 
         });
+
 }
 
 // Exercise 3
@@ -138,17 +140,6 @@ function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     cart.forEach(product => {
         validatePromotion(product);
-        // if (product.hasOwnProperty("offer")) {
-        //     if (product.quantity >= product.offer.number) {
-        //         // product.subtotalWithDiscount =  (1 - (product.offer.percent / 100))
-        //         let subtotal = product.quantity * product.price * (1 - (product.offer.percent / 100));
-        //         product.subtotalWithDiscount = +subtotal.toFixed(2);
-        //         // if (product.hasOwnProperty("subtotalWithDiscount"))
-        //         //     else
-        //     } else { //remove subtotalWithDiscount
-        //         delete product.subtotalWithDiscount;
-        //     }
-        // }
     });
 }
 
@@ -166,7 +157,7 @@ function printCart() {
                     <td>$${product.price}</td>
                     <td>${product.quantity}</td>
                     <td>$${(product.hasOwnProperty("subtotalWithDiscount") ? product.subtotalWithDiscount : (product.quantity * product.price))}</td>
-                    <td><button type="button" onclick="removeFromCart(${product.id})" class="btn btn-outline-dark"><i class="fa fa-trash"></i></button></td>
+                    <td><button type="button" onclick="removeFromCart(${product.id})" class="btn btn-outline-dark"><i class="fa fa-trash-can"></i></button></td>
                 </tr>`
         });
         cartList.innerHTML = rows;
@@ -236,3 +227,9 @@ function showCartMessage() {
     }
 
 }
+
+// const carousel = document.getElementById('carousel')
+// const carousel1 = new bootstrap.Carousel(carousel, {
+//   interval: 2000,
+//   touch: false
+// })

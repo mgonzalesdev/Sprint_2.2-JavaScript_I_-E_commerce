@@ -1,0 +1,55 @@
+:root {
+  --pink: #e53297;
+  --bs-body-font-family: "Poppins", sans-serif;
+}
+
+::after,
+::before {
+  color: var(--pink);
+}
+
+/*# sourceMappingURL=custom.css.map */
+#navbar .nav-item:hover {
+  background-color: lightgrey;
+}
+
+.btn:hover {
+  color: var(--pink);
+}
+
+.card:hover {
+  transform: scale(1.1);
+
+}
+
+.back-to-top {
+  position: fixed;
+  display: none;
+  right: 30px;
+  bottom: 30px;
+  z-index: 11;
+  animation: action 1s infinite alternate;
+}
+
+.btn {
+  border-radius: 0;
+
+}
+
+.text-pink {
+  color: var(--pink);
+}
+
+.btn-dark {
+  background-color: black;
+  color: var(--pink);
+}
+
+.img-car,
+.img-alert {
+  max-width: 250px;
+}
+
+.carousel-item {
+  height: 350px;
+}
