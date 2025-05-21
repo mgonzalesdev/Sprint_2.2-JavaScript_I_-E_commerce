@@ -271,8 +271,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center"><button type="button" onclick="buy(6)"
-										class="btn btn-outline-dark"><i
-											class="fas fa-shopping-cart me-1"></i>
+										class="btn btn-outline-dark"><i class="fas fa-shopping-cart me-1"></i>
 										Add to cart
 									</button>
 								</div>
@@ -297,8 +296,7 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center"><button type="button" onclick="buy(7)"
-										class="btn btn-outline-dark"><i
-											class="fas fa-shopping-cart me-1"></i>
+										class="btn btn-outline-dark"><i class="fas fa-shopping-cart me-1"></i>
 										Add to cart</button>
 								</div>
 							</div>
@@ -333,8 +331,8 @@
 							</div>
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center"><button type="button" onclick="buy(9)"
-										class="btn btn-outline-dark"><i
-											class="fas fa-shopping-cart me-1"></i>Add to cart</button>
+										class="btn btn-outline-dark"><i class="fas fa-shopping-cart me-1"></i>Add to
+										cart</button>
 								</div>
 							</div>
 						</div>
@@ -365,7 +363,7 @@
 		</div>
 	</footer>
 
-	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -406,6 +404,28 @@
 							</button>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="confirmModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myModalLabel">Are you sure you want to empty your cart <i
+							class="fa fa-question"></i></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="empty_car" class="row">
+						<div class="col-12 d-flex flex-column align-items-center">
+							<img class="img-alert" src="images/alert.png" alt="Alert">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+					<button id="aceptClear" type="button" class="btn btn-dark">Accept</button>
 				</div>
 			</div>
 		</div>

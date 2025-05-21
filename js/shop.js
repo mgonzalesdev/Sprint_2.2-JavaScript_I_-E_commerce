@@ -90,7 +90,7 @@ function buy(id) {
                 writable: true,  // Permite modificar el valor
                 enumerable: true,  // Permite listar la propiedad con for...in
                 configurable: false,  // Permite modificar o eliminar la propiedad
-            });
+            });           
             cart.push(productAdd);
         } else {
             cart[indice].quantity++;
@@ -104,21 +104,14 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-    fetch('template/modalConfirmClear.html')
-        .then(response => response.text())
-        .then(html => {
-            document.body.insertAdjacentHTML('beforeend', html); 
-            let myModal = new bootstrap.Modal(document.getElementById('myModal'));
-            myModal.show();
-            document.getElementById('aceptClear').addEventListener('click', () => {
-                cart.length = 0;
-                updateCartCount();
-                showCartMessage();
-                myModal.hide();
-            });
-
-        });
-
+    const myModal1 = new bootstrap.Modal('#confirmModal');
+    myModal1.show();
+    document.getElementById('aceptClear').addEventListener('click', () => {
+        cart.length = 0;
+        updateCartCount();
+        showCartMessage();
+        myModal1.hide();
+    });
 }
 
 // Exercise 3
@@ -132,6 +125,7 @@ function calculateTotal() {
             total += product.quantity * product.price;
         }
     });
+
     console.log(total);
 }
 
@@ -146,7 +140,7 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    showCartMessage();
+
     if (cart.length > 0) {
         let cartList = document.getElementById("cart_list");
 
@@ -163,6 +157,7 @@ function printCart() {
         cartList.innerHTML = rows;
         document.getElementById("total_price").innerHTML = total;
     }
+    showCartMessage();
 }
 
 // ** Nivell II **
@@ -170,7 +165,6 @@ function printCart() {
 // Exercise 7
 function removeFromCart(id) {
     console.log(cart);
-    console.log(products);
     let index = cart.findIndex(producto => producto.id === id)
     if (index == -1)
         alert("Producto no encontrado");
@@ -189,7 +183,6 @@ function removeFromCart(id) {
 
 function open_modal() {
     printCart();
-    console.log('mostrar');
 }
 
 //Funciones Auxiliares
@@ -199,7 +192,7 @@ function updateCartCount() {
 
 }
 
-function confirmClear() {
+function confirmModal() {
     alert("Confirmacion");
     myModal.modal('hide');
 }
@@ -228,8 +221,8 @@ function showCartMessage() {
 
 }
 
-// const carousel = document.getElementById('carousel')
-// const carousel1 = new bootstrap.Carousel(carousel, {
-//   interval: 2000,
-//   touch: false
-// })
+window.addEventListener('hide.bs.modal', () => {
+    if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+    }
+});
