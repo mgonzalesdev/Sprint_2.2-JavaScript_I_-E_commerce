@@ -90,7 +90,7 @@ function buy(id) {
                 writable: true,  // Permite modificar el valor
                 enumerable: true,  // Permite listar la propiedad con for...in
                 configurable: false,  // Permite modificar o eliminar la propiedad
-            });           
+            });
             cart.push(productAdd);
         } else {
             cart[indice].quantity++;
@@ -133,7 +133,7 @@ function calculateTotal() {
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     cart.forEach(product => {
-        validatePromotion(product);
+        updateProductOffer(product);
     });
 }
 
@@ -173,7 +173,7 @@ function removeFromCart(id) {
             cart.splice(index, 1);
         } else {
             cart[index].quantity--;
-            validatePromotion(cart[index]);
+            updateProductOffer(cart[index]);
         }
         updateCartCount();
         calculateTotal();
@@ -189,7 +189,6 @@ function open_modal() {
 function updateCartCount() {
     let count = cart.reduce((totalProduct, product) => totalProduct + product.quantity, 0);
     document.getElementById("count_product").innerHTML = count;
-
 }
 
 function confirmModal() {
@@ -197,7 +196,7 @@ function confirmModal() {
     myModal.modal('hide');
 }
 
-function validatePromotion(product) {
+function updateProductOffer(product) {
     if (product.hasOwnProperty("offer")) {
         if (product.quantity >= product.offer.number) {
             let subtotal = product.quantity * product.price * (1 - (product.offer.percent / 100));

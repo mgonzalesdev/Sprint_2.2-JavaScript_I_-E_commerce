@@ -148,7 +148,7 @@ function validate(event) {
 		messageAddress += verificationResult;
 		error++;
 	}
-	verificationResult = minThreeCharacters(fPassword.value);
+	verificationResult = minThreeCharacters(fAddress.value);
 	if (verificationResult != true) {
 		messageAddress += verificationResult;
 		error++;
